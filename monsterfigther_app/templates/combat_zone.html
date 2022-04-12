@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="title">
+        <h1><span class="big">C</span>ombat Zone: {{player.current_stage}}</h1>
+    </div>
+<div class="stats">
+   <table>
+        <tr>
+            <th>Player Name:<br>{{player}}</th>
+            <td id="monster_hp">Monster life:<br> {{ monster.current_life }} | {{max_life}}
+            </td>
+            <td id="monster_att">Monster attack:<br> {{ monster_current_attack }}</td>
+            <th>Enemy name:<br> {{enemy}}</th>
+            <td>Enemy life:<br> {{ enemy.current_life }} | {{enemy.life}}</td>
+            <td>Enemy attack:<br> {{enemy.attack}}</td>
+            <td>Enemy type:<br> {{ enemy.get_type_display }}</td>
+        </tr>
+</table>
+</div>
+    <div class="actions">
+        <form name="Attack1" method="POST">
+            {% csrf_token %}
+            {{form1}}
+            <div class="button" title="Demage: {{attack1}} Heal: {{heal1}}">
+            <input type="submit"  value="{{skill_name.0}}" name="form1" >
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+            {% if attack2 is not None %}
+        <form name="Attack2" method="POST">
+            {% csrf_token %}
+            {{form2}}
+            <div class="button" title="Demage: {{attack2}} Heal: {{heal2}}">
+            <input type="submit"  value="{{skill_name.1}}" name="form2" >
+            </div>
+        </form>
+        {% endif %}
+    </div>
+    <div class="actions">
+        {% if attack3 is not None %}
+        <form name="Attack3" method="POST">
+            {% csrf_token %}
+            {{form3}}
+            <div class="button" title="Demage: {{attack3}} Heal: {{heal3}}">
+            <input type="submit"  value="{{skill_name.2}}" name="form3">
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

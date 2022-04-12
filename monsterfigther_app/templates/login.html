@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Loging to App</h3>
+<form method="post">
+  {% csrf_token %}
+  {{form}}
+  <input type="submit" value="Login">
+</form>
+{% endblock %}
+
+{% block  footer %}
+    {% if user.is_authenticated == True %}
+        <a href="/login/resetpass/{{user.id}}">Change Password</a>
+    {% endif %}
+    {% if user.is_authenticated == True %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+    {% if user.is_authenticated == False %}
+        <a href="{% url 'registration' %}">Registration</a>
+    {% endif %}
+    {{ user }}
+{% endblock %}

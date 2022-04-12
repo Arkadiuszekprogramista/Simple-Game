@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} {% for item in item %} Abilitie: |{{skill}}| {% endfor %} {% endblock %}
+{% block content %}
+
+{% for skill in skill %}
+    <h3>Name of Skill: {{skill}}<br></h3>
+    Description of ability: {{skill.description}}<br>
+    Modification of ability: {{skill.modification}}<br>
+    Ability damage: {{skill.damage}}<br>
+    Ability heal: {{skill.heal}}<br><br>
+
+{% endfor %}
+
+{% if is_paginated %}
+<div class="paginator"><br>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">First</a>
+    {% endif %}
+
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <span> |{{ i }}| </span>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Last</a>
+    {% endif %}
+
+{% endif %}
+</div>
+
+{% endblock %}

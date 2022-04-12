@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Player: {{player.user.username }} {% endblock %}
+{% block content %}
+<h2>Player name: {{player.user.username}} </h2>
+
+<h3>Player stage: {{player.current_stage}}</h3>
+
+<h3>Player monster: <a href="/player/{{player.id}}/monster_details"> {{player.player_monster}}</a></h3>
+
+{% if player.player_monster == None %}
+<a href="/player/{{player.id}}/create_monster/">Create  Monster</a>
+{% endif %}
+
+<h3>Monster equipped items:</h3>
+<ul>
+{% for item in items %}
+<li><a href="/item/{{item.slug}}/">{{item}}</a></li>
+{% endfor %}
+</ul>
+<h4><a href="/player/{{player.id}}/monster_items/"> Change monster items</a></h4>
+
+
+{% endblock %}

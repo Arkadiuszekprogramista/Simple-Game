@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Permanent+Marker" rel="stylesheet">
+    <title>{% block title %}&#x1F47E&#x1F47E&#x1F47E| The Monster Project |&#x1F47E&#x1F47E&#x1F47E {% endblock %}</title>
+</head>
+<body>
+
+{% block content %}
+<section class="splash-screen load">
+    <div class="container">
+
+        <div class="title">
+            <h1><span class="big">M</span>onster</h1>
+            <h1><span class="big">C</span>omba<span class="big">T</span></h1>
+        </div>
+    </div>
+    <div class="menu">
+    <div class="button grey-with-red">
+        {% if user.is_authenticated == True %}
+        {% if user.player.player_monster == None %}
+            <a class="purple-with-blue" href="/player/{{user.player.id}}/create_monster/">New Game</a><br>
+        {% endif %}
+        {% if user.player.player_monster != None %}
+            <h1 id="fight-link"> <a class="purple-with-blue" href="/player/{{user.player.id}}/combat/">FIGHT !</a> <br></h1>
+            <a href="/player/{{user.player.id}}/"> Player details</a><br>
+            <a href="/player/{{user.player.id}}/monster_details/">Monster details</a><br>
+            <a href="/items/">List of items</a><br>
+            <a href="/skills/">List of abilities</a><br>
+        {% endif %}
+    </div>
+</div>
+        {% else %}
+        <h2><a href="{% url 'login' %}"> Please Login/Register</a></h2>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+</body>
+<footer>
+{% block footer %}
+    {% if user.is_authenticated == True %}
+        <a href="/login/resetpass/{{user.player.id}}">Change Password</a>
+    {% endif %}
+    {% if user.is_authenticated == True %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+    {% if user.is_authenticated == False %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    {{ user }}
+    {% endblock %}
+
+</footer>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Monster: {{monster}} {% endblock %}
+{% block content %}
+
+<h2>Monster name: {{monster}}</h2>
+<h3>Monster base life: {{monster.life}}</h3>
+<h3>Monster base attack : {{monster.attack}}</h3>
+<h3>Monster life: {{monster.max_life}}</h3>
+<h4>Monster equipment:</h4>
+
+<ul>
+{% for item in items %}
+<li><a href="/item/{{item.slug}}/">Name: {{item}}</a></li>
+{% endfor %}
+</ul>
+<a href="/player/{{player.id}}/monster_items/"> <h4>Change items</h4></a>
+
+<h4>Monster abilities:</h4>
+<ul>
+{% for skill in skills %}
+<li><a href="/skill/{{skill.slug}}/">{{skill}}</a></li>
+{% endfor %}
+</ul>
+<a href="/player/{{player.id}}/monster_abilities/"> <h4>Change abilities</h4> </a>
+
+<h4>Monster description: {{monster.description}}</h4>
+
+{{monster_details}}
+{% endblock %}
